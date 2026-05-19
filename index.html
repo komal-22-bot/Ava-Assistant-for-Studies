@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ava – Avatar Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="widget">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-avatar">🤖</div>
+      <div class="header-info">
+        <div class="header-name">Ava - Avatar Assistant</div>
+        <div class="header-status">
+          <div class="status-dot"></div>
+          <span class="status-text">Online · usually replies instantly</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="messages" id="messages">
+
+      <!-- Welcome message (static, always shown) -->
+      <div class="msg-row bot">
+        <div class="msg-bot-avatar">🤖</div>
+        <div class="bubble bot">
+          👋 Hi! I'm Ava. Ask me about our AI &amp; Cyber Security programs, batches, or pricing.
+        </div>
+      </div>
+
+      <!-- Typing dots (hidden by default, shown while waiting for reply) -->
+      <div class="typing-row" id="typingRow">
+        <div class="msg-bot-avatar">🤖</div>
+        <div class="typing-bubble">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- QUICK REPLY CHIPS -->
+    <div class="chips-area" id="chipsArea">
+      <div class="chip" onclick="onChip(this)">What courses do you offer?</div>
+      <div class="chip" onclick="onChip(this)">When is the next batch?</div>
+      <div class="chip" onclick="onChip(this)">Tell me about the discount</div>
+    </div>
+
+    <!-- INPUT BAR -->
+    <div class="input-bar">
+      <textarea
+        class="chat-input"
+        id="chatInput"
+        placeholder="Type your message..."
+        rows="1"
+        onkeydown="onKey(event)"
+        oninput="autoGrow(this)"
+      ></textarea>
+      <button class="send-btn" id="sendBtn" onclick="send()" aria-label="Send">
+        <!-- Send icon -->
+        <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
