@@ -1,0 +1,93 @@
+# Ava – Avatar AI Chatbot
+
+Exact-match clone of the Ava widget screenshot, backed by a FastAPI + Claude Python server.
+
+---
+
+## Project Structure
+
+```
+ava-chat-widget/
+├── index.html        ← Frontend (drop onto your website)
+├── main.py           ← FastAPI backend
+├── requirements.txt  ← Python dependencies
+└── README.md
+```
+
+---
+
+## 1 · Backend Setup (Python)
+
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Set your Anthropic API key
+```bash
+# macOS / Linux
+export ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"
+
+# Windows PowerShell
+$env:ANTHROPIC_API_KEY="sk-ant-xxxxxxxxxxxx"
+```
+
+### Run the server
+```bash
+uvicorn main:app --reload --port 8000
+```
+
+Server will be live at → `http://localhost:8000`
+Swagger docs at        → `http://localhost:8000/docs`
+
+---
+
+## 2 · Frontend Setup
+
+Just open `index.html` in a browser — no build step needed.
+
+The frontend calls `http://localhost:8000/chat` by default.
+
+### To deploy on your Avatar website:
+1. Copy the `<style>` and HTML from `index.html` into your site layout
+2. Update `API_URL` in the `<script>` block to your deployed backend URL:
+   ```js
+   const API_URL = 'https://your-backend.com/chat';
+   ```
+
+---
+
+## 3 · API Reference
+
+### `POST /chat`
+
+**Request**
+```json
+{
+  "message": "What courses do you offer?",
+  "history": [
+    { "role": "user",      "content": "Hi" },
+    { "role": "assistant", "content": "Hello! How can I help?" }
+  ]
+}
+```
+
+**Response**
+```json
+{
+  "reply": "We offer 4 programs: Cyber Security (6 weeks), AI for Students (8 weeks)..."
+}
+```
+
+---
+
+## 4 · Deploy to Production
+
+### Backend — Railway / Render / Fly.io
+- Add `ANTHROPIC_API_KEY` as an environment variable in your hosting dashboard
+- Set start command: `uvicorn main:app --host 0.0.0.0 --port 8000`
+- Update CORS `allow_origins` in `main.py` to your website domain
+
+### Frontend — Vercel / Netlify / your own server
+- Upload `index.html` or integrate the widget into your Next.js / React project
+- Point `API_URL` to your live backend URL
